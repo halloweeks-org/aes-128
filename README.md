@@ -1,10 +1,15 @@
 # AES-128 ECB AND CBC
 
+## Important Note
+- **No Padding**: This implementation does not include padding. For both CBC and ECB modes, ensure that all input and output buffers are multiples of 16 bytes.
+
+- **Padding Recommendation**: If you require padding, it's recommendable to use the PKCS7 padding scheme.
+
+
 ## AES-128 ECB Encrypt Decrypt Example
 
-There is no padding supported, block size required 16 bytes
 
-```
+```c
 #include <stdio.h>
 #include "aes_128.h"
 
@@ -57,9 +62,8 @@ int main() {
 ```
 
 ## AES-128 CBC Encrypt Decrypt
-There is no padding supported, cbc mode support multiple blocks 
 
-```
+```c
 #include <stdio.h>
 #include "aes_128.h"
 
@@ -124,3 +128,7 @@ int main() {
   return 0;
 }
 ```
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
