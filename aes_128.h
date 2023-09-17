@@ -1002,7 +1002,7 @@ static void AES_ecb_encrypt(const uint8_t *data, uint32_t size, uint8_t *out, co
   }
 
   for (uint32_t offset = 0; offset < size; offset += AES_BLOCK_SIZE) {
-    AES_encrypt(data + offset, out + offset; rk);
+    AES_encrypt(data + offset, out + offset, rk);
   }
 }
 
