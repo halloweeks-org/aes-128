@@ -961,7 +961,7 @@ static void AES_decrypt(const uint8_t ciphertext[AES_BLOCK_SIZE], uint8_t plaint
 	PUTU32(plaintext + 12, s3);
 }
 
-void AES_cbc_encrypt(const uint8_t *data, uint32_t size, uint8_t *out, const uint32_t *rk, const uint8_t *iv) {
+static void AES_cbc_encrypt(const uint8_t *data, uint32_t size, uint8_t *out, const uint32_t *rk, const uint8_t *iv) {
     uint8_t prev_block[16];  // Store the previous ciphertext block or IV
     memcpy(prev_block, iv, 16);  // Initialize the previous block with the IV
     
@@ -979,7 +979,7 @@ void AES_cbc_encrypt(const uint8_t *data, uint32_t size, uint8_t *out, const uin
     }
 }
 
-void AES_cbc_decrypt(const uint8_t *data, uint32_t size, uint8_t *out, const uint32_t *rk, const uint8_t *iv) {
+static void AES_cbc_decrypt(const uint8_t *data, uint32_t size, uint8_t *out, const uint32_t *rk, const uint8_t *iv) {
     uint8_t prev_block[16];  // Store the previous ciphertext block or IV
     memcpy(prev_block, iv, 16);  // Initialize the previous block with the IV
 
@@ -994,6 +994,26 @@ void AES_cbc_decrypt(const uint8_t *data, uint32_t size, uint8_t *out, const uin
         // Update the previous block with the current ciphertext
         memcpy(prev_block, data + i, 16);
     }
+}
+
+static void AES_ecb_encrypt(const uint8_t *data, uint32_t size, uint8_t *out, const uint32_t *rk) {
+  if (!data || size == 0 || !rk) {
+	  return;
+  }
+
+  for (uint32_t offset = 0; offset < size; offset += AES_BLOCK_SIZE) {
+    AES_encrypt(data + offset, out + offset; rk);
+  }
+}
+
+static void AES_ecb_decrypt(const uint8_t *data, uint32_t size, uint8_t *out, const uint32_t *rk) {
+  if (!data || size == 0 || !rk) {
+    return;
+  }
+
+  for (uint32_t offset = 0; offset < size; offset += AES_BLOCK_SIZE) {
+    AES_decrypt(data + offset, out + offset, rk);
+  }
 }
 
 #endif
