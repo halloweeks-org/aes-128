@@ -25,7 +25,7 @@ int main() {
   AES_encrypt_init(key, rk);
   
   // AES-128 Encrypt data ecb
-  AES_encrypt(data, ciphertext, rk);
+  AES_ecb_encrypt(data, ciphertext, rk);
   
   printf("Encrypted data: ");
   for (uint8_t i = 0; i < AES_BLOCK_SIZE; i++) {
@@ -34,7 +34,7 @@ int main() {
   printf("\n\n");
   
   // AES-128 Key Expansion decryption
-  AES_decrypt_init(key, rk);
+  AES_ecb_decrypt_init(key, rk);
   
   // AES-128 Encrypt data ecb
   AES_decrypt(ciphertext, plaintext, rk);
