@@ -1,4 +1,4 @@
-# AES-128 ECB AND CBC
+## AES-128 ECB AND CBC
 
 ## Important Note
 - **No Padding**: This implementation does not include padding. For both CBC and ECB modes, ensure that all input and output buffers are multiples of 16 bytes.
@@ -37,7 +37,7 @@ int main() {
   AES_encrypt_init(key, rk);
   
   // AES-128 Encrypt data ecb
-  AES_encrypt(data, ciphertext, rk);
+  AES_ecb_encrypt(data, ciphertext, rk);
   
   printf("Encrypted data: ");
   for (uint8_t i = 0; i < AES_BLOCK_SIZE; i++) {
@@ -49,7 +49,7 @@ int main() {
   AES_decrypt_init(key, rk);
   
   // AES-128 Encrypt data ecb
-  AES_decrypt(ciphertext, plaintext, rk);
+  AES_ecb_decrypt(ciphertext, plaintext, rk);
   
   printf("Decrypted data: ");
   for (uint8_t i = 0; i < AES_BLOCK_SIZE; i++) {
